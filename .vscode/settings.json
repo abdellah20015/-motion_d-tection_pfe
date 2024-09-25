@@ -1,0 +1,14 @@
+{
+    "git.ignoreLimitWarning": true,
+    "notebook.defaultFormatter": "ms-toolsai.jupyter",
+    "ipynb.pasteImagesAsAttachments.enabled": true,
+    "files.associations": {
+        "*.ipynb": "Jupyter",
+        "*.dart": "dart"
+    },
+    "sonarlint.focusOnNewCode": false,
+    "sonarlint.disableTelemetry": false,
+    "sonarlint.output.showVerboseLogs": true,
+    "sonarlint.output.showAnalyzerLogs": true,
+    "cmake.ignoreCMakeListsMissing": true
+}

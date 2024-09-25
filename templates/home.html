@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <title>EmotiVoice</title>
+        <link rel="icon" type="image/png" href="static/icone.png">
+    </head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .navbar {
+            background-color: #007bff;
+        }
+        .navbar-brand img {
+            margin-right: 10px;
+        }
+        .hero-section {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .footer {
+            background-color: #f1f1f1;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/static/logo.png" alt="Logo Détection des Émotions" width="40" height="40">
+                EmotiVoice
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/signup"><i class="fas fa-user-plus"></i> Inscription</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+    <div class="container">
+        {% if current_user.is_authenticated %}
+        <h1><i class="fas fa-user-circle"></i> Bonjour, {{ current_user.username }}!</h1>
+            <p>Que souhaitez-vous faire aujourd'hui?</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-tachometer-alt fa-3x mb-3 text-info"></i>
+                            <h5 class="card-title">Tableau de Bord</h5>
+                            <p class="card-text">Accédez à votre tableau de bord pour voir vos analyses et statistiques.</p>
+                            <a href="/dashboard" class="btn btn-info">
+                                <i class="fas fa-tachometer-alt"></i> Aller au Tableau de bord
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-microphone fa-3x mb-3 text-primary"></i>
+                            <h5 class="card-title">Enregistrer audio</h5>
+                            <p class="card-text">Enregistrez votre voix et laissez-nous analyser vos émotions.</p>
+                            <a href="/record_audio" class="btn btn-primary">
+                                <i class="fas fa-microphone"></i> Enregistrer audio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-upload fa-3x mb-3 text-secondary"></i>
+                            <h5 class="card-title">Importer audio</h5>
+                            <p class="card-text">Importez un fichier audio pour analyser vos émotions.</p>
+                            <a href="/upload_audio" class="btn btn-secondary">
+                                <i class="fas fa-upload"></i> Importer audio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+        <h1><i class="fas fa-smile-beam"></i> Bienvenue sur notre site de détection des émotions!</h1>
+            <p>Découvrez comment votre voix peut révéler vos émotions avec notre technologie avancée. Que vous souhaitiez analyser une nouvelle piste audio ou explorer vos résultats précédents, notre plateforme vous offre des outils simples et efficaces.</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-user-plus fa-3x mb-3 text-success"></i>
+                            <h5 class="card-title">Créez votre compte</h5>
+                            <p class="card-text">Rejoignez-nous pour accéder à des analyses personnalisées de vos émotions.</p>
+                            <a href="/signup" class="btn btn-success btn-lg">
+                                <i class="fas fa-user-plus"></i> Inscrivez-vous
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-sign-in-alt fa-3x mb-3 text-secondary"></i>
+                            <h5 class="card-title">Connectez-vous</h5>
+                            <p class="card-text">Déjà membre? Connectez-vous pour continuer à explorer vos émotions.</p>
+                            <a href="/login" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-sign-in-alt"></i> Se connecter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">
+                &copy; 2024 Détection des émotions avec la voix. Tous droits réservés.
+                <br>
+                <i class="fas fa-user"></i> Abdellah Agnaou
+                <br>
+                <i class="fas fa-graduation-cap"></i> Master informatique et télécommunication
+            </span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
